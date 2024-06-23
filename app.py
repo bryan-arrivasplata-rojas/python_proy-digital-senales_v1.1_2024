@@ -38,4 +38,4 @@ if __name__ == '__main__':
     public_url_str = str(public_url)
     print('URL pública de Ngrok:', public_url_str)
     # Run Flask application
-    app.run(debug=True)
+    app.run()
