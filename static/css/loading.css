@@ -1,0 +1,29 @@
+#loading-screen {
+    height: 100vh;
+    width: 100vw;
+    text-align: center;
+    align-content: center;
+    opacity: 1;
+    transition: opacity 1s ease-in-out, visibility 1s ease-in-out; /* Transición para opacidad y visibilidad */
+    position: fixed;
+    z-index: 3;
+    background-color: white;
+}
+
+#loading-screen.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+#carga{
+    color: white;
+    background-color: darkgray;
+    text-align: center;
+    height: 100vh;
+    align-content: center;
+    opacity: 0.6;
+    z-index: 3;
+    position: fixed;
+    width: 100vw;
+    display: none;
+}

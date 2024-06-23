@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyecto PDS</title>
+    <link rel="icon" href="{{ url_for('static', filename='ico/audio.ico') }}" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/loading.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/carousel.css') }}">
+</head>
+<body>
+    <div id="loading-screen">
+        <img class="imagen_logo" src="{{ url_for('static', filename='img/logo_carga.png') }}" alt="Loading..." height="100">
+    </div>
+    <div id="carga">
+        <div id="circle-spinner" class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+    <div class="home">
+        <section class="introduction">
+            {% if show_info %}
+            <h1>{{ c_name }}</h1>
+            <h2>Creadores del proyecto</h2>
+            <ul>
+                {% for name in p_names %}
+                <li>{{ name }}</li>
+                {% endfor %}
+            </ul>
+            <p>Presentando una aplicación web para el análisis de audio con los principales filtros.</p>
+            {% endif %}
+        </section>
+        <section class="gallery">
+            <h2>Galería de Filtros de audio</h2>
+            <div id="splide" class="splide">
+                <div class="splide__track">
+                    <ul class="splide__list">
+                        <li class="splide__slide"><img id="waveform_img" src="data:image/png;base64,{{ waveform_img }}" alt="Forma de onda"></li>
+                        <li class="splide__slide"><img id="spectrogram_img" src="data:image/png;base64,{{ spectrogram_img }}" alt="Espectrograma"></li>
+                        <li class="splide__slide"><img id="butterworth_img" src="data:image/png;base64,{{ butterworth_img }}" alt="Forma de onda suavizada"></li>
+                        <li class="splide__slide"><img id="fir_img_band" src="data:image/png;base64,{{ fir_img_band }}" alt="Forma de onda suavizada"></li>
+                        <li class="splide__slide"><img id="fir_img_low" src="data:image/png;base64,{{ fir_img_low }}" alt="Forma de onda suavizada"></li>
+                        <li class="splide__slide"><img id="fir_img_high" src="data:image/png;base64,{{ fir_img_high }}" alt="Forma de onda suavizada"></li>
+                        <li class="splide__slide"><img id="rainbow_img" src="data:image/png;base64,{{ rainbow_img }}" alt="Forma de onda suavizada"></li>
+                        <li class="splide__slide"><img id="hot_img" src="data:image/png;base64,{{ hot_img }}" alt="Forma de onda suavizada"></li>
+                        <li class="splide__slide"><img id="sine_img" src="data:image/png;base64,{{ sine_img }}" alt="Forma de onda suavizada"></li>
+                        <li class="splide__slide"><img id="cosine_img" src="data:image/png;base64,{{ cosine_img }}" alt="Forma de onda suavizada"></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        <!-- Botón flotante -->
+        <button class="floating-btn" onclick="document.getElementById('fileInput').click()" class="btn btn-primary">
+            <img src="https://static.vecteezy.com/system/resources/previews/015/337/675/non_2x/transparent-upload-icon-free-png.png" alt="Upload" style="margin-top: 0px;">
+        </button>
+        <input type="file" id="fileInput" style="display:none;" accept="audio/*">
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            new Splide('#splide', {
+                type: 'carousel',
+                perPage: 2,
+                gap: '1rem',
+                pagination: true,
+                breakpoints: {
+                    1000: {
+                        perPage: 1,
+                    },
+                    768: {
+                        perPage: 1,
+                    },
+                    576: {
+                        perPage: 1,
+                    },
+                }
+            }).mount();
+        });
+    </script>
+    <script>
+        // Función para ocultar suavemente la pantalla de carga después de 5 segundos
+        setTimeout(function() {
+            document.getElementById('loading-screen').classList.add('hidden');
+            document.body.style.overflowY = 'auto';
+        }, 3000);
+    </script>
+    <script>
+        // Función para actualizar las imágenes con los nuevos datos recibidos
+        function updateImages(data) {
+            document.querySelector('#waveform_img').removeAttribute('src');
+            document.querySelector('#spectrogram_img').removeAttribute('src');
+            document.querySelector('#butterworth_img').removeAttribute('src');
+            document.querySelector('#fir_img_band').removeAttribute('src');
+            document.querySelector('#fir_img_low').removeAttribute('src');
+            document.querySelector('#fir_img_high').removeAttribute('src');
+            document.querySelector('#rainbow_img').removeAttribute('src');
+            document.querySelector('#hot_img').removeAttribute('src');
+            document.querySelector('#sine_img').removeAttribute('src');
+            document.querySelector('#cosine_img').removeAttribute('src');
+
+
+            document.querySelector('#waveform_img').src = "data:image/png;base64," + data.waveform_img;
+            document.querySelector('#spectrogram_img').src = "data:image/png;base64," + data.spectrogram_img;
+            document.querySelector('#butterworth_img').src = "data:image/png;base64," + data.butterworth_img;
+            document.querySelector('#fir_img_band').src = "data:image/png;base64," + data.fir_img_band;
+            document.querySelector('#fir_img_low').src = "data:image/png;base64," + data.fir_img_low;
+            document.querySelector('#fir_img_high').src = "data:image/png;base64," + data.fir_img_high;
+            document.querySelector('#rainbow_img').src = "data:image/png;base64," + data.rainbow_img;
+            document.querySelector('#hot_img').src = "data:image/png;base64," + data.hot_img;
+            document.querySelector('#sine_img').src = "data:image/png;base64," + data.sine_img;
+            document.querySelector('#cosine_img').src = "data:image/png;base64," + data.cosine_img;
+        }
+
+        // Función para cargar las imágenes al cargar la página o al cargar un nuevo archivo de audio
+        function loadImages() {
+            fetch('/')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Error al obtener los datos de la página');
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Actualizar las imágenes con los datos iniciales
+                console.log("Se hice correctamente");
+                updateImages(data);
+            })
+            .catch(error => {
+                console.log('Error:', error);
+            });
+        }
+
+        document.getElementById('fileInput').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            const formData = new FormData();
+            formData.append('audio', file);
+            document.body.style.overflowY = 'hidden';
+            document.getElementById('carga').style.display = 'block';
+
+            fetch('/', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Error al procesar el archivo de audio');
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Actualizar las imágenes con los nuevos datos recibidos
+                updateImages(data);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            })
+            .finally(() => {
+                // Ocultar el spinner de círculos al finalizar la solicitud (independientemente del resultado)
+                document.getElementById('carga').style.display = 'none';
+                document.body.style.overflowY = 'auto';
+            });
+        });
+    </script>
+    <script>
+        // JavaScript para controlar el carrusel
+        function moveSlide(direction) {
+            const slider = document.querySelector('.image-slider');
+            const slideWidth = slider.clientWidth;
+            const currentScrollLeft = slider.scrollLeft;
+
+            slider.scrollTo({
+                left: currentScrollLeft + direction * slideWidth,
+                behavior: 'smooth'
+            });
+        }
+    </script>
+</body>
+</html>

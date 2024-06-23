@@ -1,0 +1,98 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: #333;
+    overflow-y: hidden;
+}
+
+.introduction {
+    position: relative;
+    padding: 60px 20px;
+    background: url('https://cdn.pixabay.com/photo/2021/02/13/14/51/music-6011755_1280.jpg') no-repeat center center/cover;
+    color: #fff;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+    overflow: hidden;
+    text-align: center;
+}
+
+.introduction::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4); /* Ajusta el valor de 0.6 para más o menos oscuridad */
+    z-index: 1;
+}
+
+.introduction h1,
+.introduction h2,
+.introduction p,
+.introduction ul {
+    position: relative;
+    z-index: 2;
+}
+
+.introduction h1 {
+    font-size: 3em;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+.introduction h2 {
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+.introduction p {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+}
+
+.introduction ul {
+    list-style: none;
+    padding: 0;
+}
+
+.introduction ul li {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 10px 20px;
+    margin: 5px 0;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 1.1em;
+}
+
+h2 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.floating-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    background-color: #fff;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    z-index: 1; /* Asegura que esté por encima de otros elementos */
+    transition: background-color 0.3s ease;
+}
+
+.floating-btn:hover {
+    background-color: #f8e5e5;
+}
+
+.floating-btn img {
+    width: 30px;
+    height: 30px;
+    margin-top: 15px; /* Ajuste para centrar verticalmente el icono */
+}
