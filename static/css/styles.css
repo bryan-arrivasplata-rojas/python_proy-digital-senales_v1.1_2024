@@ -96,3 +96,7 @@ h2 {
     height: 30px;
     margin-top: 15px; /* Ajuste para centrar verticalmente el icono */
 }
+
+.img-click{
+    cursor: pointer;
+}

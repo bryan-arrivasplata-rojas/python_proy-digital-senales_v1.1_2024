@@ -13,7 +13,7 @@ ngrok.set_auth_token(os.getenv('SECRET_KEY_NGROK'))
 # Variables que controlan la visibilidad y la información de los nombres
 show_info = True
 c_name = "C_NAME"
-p_names = ["P_NAME_1"]
+p_names = ["P_NAME"]
 
 app = Flask(__name__)
 
@@ -38,4 +38,4 @@ if __name__ == '__main__':
     public_url_str = str(public_url)
     print('URL pública de Ngrok:', public_url_str)
     # Run Flask application
-    app.run()
+    app.run(debug=True)

@@ -35,30 +35,45 @@
             {% endif %}
         </section>
         <section class="gallery">
-            <h2>Galería de Filtros de audio</h2>
+            <h2>Filtros de audio</h2>
             <div id="splide" class="splide">
                 <div class="splide__track">
                     <ul class="splide__list">
-                        <li class="splide__slide"><img id="waveform_img" src="data:image/png;base64,{{ waveform_img }}" alt="Forma de onda"></li>
-                        <li class="splide__slide"><img id="spectrogram_img" src="data:image/png;base64,{{ spectrogram_img }}" alt="Espectrograma"></li>
-                        <li class="splide__slide"><img id="butterworth_img" src="data:image/png;base64,{{ butterworth_img }}" alt="Forma de onda suavizada"></li>
-                        <li class="splide__slide"><img id="fir_img_band" src="data:image/png;base64,{{ fir_img_band }}" alt="Forma de onda suavizada"></li>
-                        <li class="splide__slide"><img id="fir_img_low" src="data:image/png;base64,{{ fir_img_low }}" alt="Forma de onda suavizada"></li>
-                        <li class="splide__slide"><img id="fir_img_high" src="data:image/png;base64,{{ fir_img_high }}" alt="Forma de onda suavizada"></li>
-                        <li class="splide__slide"><img id="rainbow_img" src="data:image/png;base64,{{ rainbow_img }}" alt="Forma de onda suavizada"></li>
-                        <li class="splide__slide"><img id="hot_img" src="data:image/png;base64,{{ hot_img }}" alt="Forma de onda suavizada"></li>
-                        <li class="splide__slide"><img id="sine_img" src="data:image/png;base64,{{ sine_img }}" alt="Forma de onda suavizada"></li>
-                        <li class="splide__slide"><img id="cosine_img" src="data:image/png;base64,{{ cosine_img }}" alt="Forma de onda suavizada"></li>
+                        <li class="splide__slide"><img class="img-click" id="waveform_img" src="data:image/png;base64,{{ waveform_img }}" alt="Forma de onda"></li>
+                        <li class="splide__slide"><img class="img-click" id="spectrogram_img" src="data:image/png;base64,{{ spectrogram_img }}" alt="Espectrograma"></li>
+                        <li class="splide__slide"><img class="img-click" id="butterworth_img" src="data:image/png;base64,{{ butterworth_img }}" alt="Forma de onda suavizada"></li>
+                        <li class="splide__slide"><img class="img-click" id="fir_img_band" src="data:image/png;base64,{{ fir_img_band }}" alt="Forma de onda suavizada"></li>
+                        <li class="splide__slide"><img class="img-click" id="fir_img_low" src="data:image/png;base64,{{ fir_img_low }}" alt="Forma de onda suavizada"></li>
+                        <li class="splide__slide"><img class="img-click" id="fir_img_high" src="data:image/png;base64,{{ fir_img_high }}" alt="Forma de onda suavizada"></li>
+                        <li class="splide__slide"><img class="img-click" id="rainbow_img" src="data:image/png;base64,{{ rainbow_img }}" alt="Forma de onda suavizada"></li>
+                        <li class="splide__slide"><img class="img-click" id="hot_img" src="data:image/png;base64,{{ hot_img }}" alt="Forma de onda suavizada"></li>
+                        <li class="splide__slide"><img class="img-click" id="sine_img" src="data:image/png;base64,{{ sine_img }}" alt="Forma de onda suavizada"></li>
+                        <li class="splide__slide"><img class="img-click" id="cosine_img" src="data:image/png;base64,{{ cosine_img }}" alt="Forma de onda suavizada"></li>
                     </ul>
                 </div>
             </div>
         </section>
+        <!-- Modal -->
+        <div class="modal fade show" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true" aria-modal="true" role="dialog">
+            <div class="modal-dialog modal-dialog-centered modal-xl">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <img id="modalImage" src="" alt="Modal Image" class="img-fluid">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <!-- Botón flotante -->
         <button class="floating-btn" onclick="document.getElementById('fileInput').click()" class="btn btn-primary">
             <img src="https://static.vecteezy.com/system/resources/previews/015/337/675/non_2x/transparent-upload-icon-free-png.png" alt="Upload" style="margin-top: 0px;">
         </button>
         <input type="file" id="fileInput" style="display:none;" accept="audio/*">
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -79,6 +94,15 @@
                     },
                 }
             }).mount();
+        });
+        document.querySelectorAll('.img-click').forEach(img => {
+            console.log("Hola");
+            img.addEventListener('click', function () {
+                console.log("Hola 2");
+                const modal = new bootstrap.Modal(document.getElementById('imageModal'));
+                document.getElementById('modalImage').src = this.src;
+                modal.show();
+            });
         });
     </script>
     <script>
