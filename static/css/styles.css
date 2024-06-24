@@ -81,7 +81,7 @@ h2 {
     color: #fff;
     border: none;
     border-radius: 50%;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
     cursor: pointer;
     z-index: 1; /* Asegura que esté por encima de otros elementos */
     transition: background-color 0.3s ease;

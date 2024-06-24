@@ -45,10 +45,10 @@
                         <li class="splide__slide"><img class="img-click" id="fir_img_band" src="data:image/png;base64,{{ fir_img_band }}" alt="Forma de onda suavizada"></li>
                         <li class="splide__slide"><img class="img-click" id="fir_img_low" src="data:image/png;base64,{{ fir_img_low }}" alt="Forma de onda suavizada"></li>
                         <li class="splide__slide"><img class="img-click" id="fir_img_high" src="data:image/png;base64,{{ fir_img_high }}" alt="Forma de onda suavizada"></li>
-                        <li class="splide__slide"><img class="img-click" id="rainbow_img" src="data:image/png;base64,{{ rainbow_img }}" alt="Forma de onda suavizada"></li>
-                        <li class="splide__slide"><img class="img-click" id="hot_img" src="data:image/png;base64,{{ hot_img }}" alt="Forma de onda suavizada"></li>
                         <li class="splide__slide"><img class="img-click" id="sine_img" src="data:image/png;base64,{{ sine_img }}" alt="Forma de onda suavizada"></li>
                         <li class="splide__slide"><img class="img-click" id="cosine_img" src="data:image/png;base64,{{ cosine_img }}" alt="Forma de onda suavizada"></li>
+                        <li class="splide__slide"><img class="img-click" id="rainbow_img" src="data:image/png;base64,{{ rainbow_img }}" alt="Forma de onda suavizada"></li>
+                        <li class="splide__slide"><img class="img-click" id="hot_img" src="data:image/png;base64,{{ hot_img }}" alt="Forma de onda suavizada"></li>
                     </ul>
                 </div>
             </div>
@@ -96,9 +96,7 @@
             }).mount();
         });
         document.querySelectorAll('.img-click').forEach(img => {
-            console.log("Hola");
             img.addEventListener('click', function () {
-                console.log("Hola 2");
                 const modal = new bootstrap.Modal(document.getElementById('imageModal'));
                 document.getElementById('modalImage').src = this.src;
                 modal.show();
