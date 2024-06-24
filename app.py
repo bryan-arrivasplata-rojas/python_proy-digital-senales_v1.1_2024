@@ -13,7 +13,7 @@ ngrok.set_auth_token(os.getenv('SECRET_KEY_NGROK'))
 # Variables que controlan la visibilidad y la información de los nombres
 show_info = True
 c_name = "C_NAME"
-p_names = ["P_NAME"]
+p_names = ["P_NAMES"]
 
 app = Flask(__name__)
 

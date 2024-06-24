@@ -73,7 +73,7 @@ def fir(file_path, filter_type, cutoff_freq=1000, numtaps=101):
     # Generar la gráfica de la forma de onda filtrada
     fir_fig = plt.figure(figsize=(12, 4))
     librosa.display.waveshow(filtered_audio, sr=sr, color='green')
-    plt.title('Forma de onda filtrada (FIR)')
+    plt.title('Forma de onda filtrada (FIR) - '+filter_type)
     plt.xlabel('Tiempo (s)')
     plt.ylabel('Amplitud (unidad digital)')
     
